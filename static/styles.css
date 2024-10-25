@@ -1,0 +1,447 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #e6eff5; /* Светлый фон */
+    overflow: hidden; /* Отключаем прокрутку для body */
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+    background-color: #0088cc; /* Цвет шапки */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 30px; 
+    padding: 10px; 
+    color: white; /* Цвет текста в шапке */
+}
+
+.container {
+    display: flex;
+    flex-grow: 1; /* Заставляет контейнер занимать оставшееся пространство */
+    height: calc(100vh - 50px); /* Учитываем высоту шапки (50px) */
+}
+
+.chat-list {
+    width: 35%;
+    padding: 10px;
+    background-color: #f9f9f9; /* Цвет фона списка чатов */
+    border-right: 1px solid #ccc;
+    overflow-y: auto; /* Вертикальная прокрутка для списка чатов */
+    height: 100%; /* Устанавливаем высоту для списка чатов */
+}
+
+.active-chat {
+    background-color: #ffffff; /* Цвет фона чата */
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.active-chat:hover {
+    background-color: #d1f0ff; /* Цвет при наведении */
+}
+
+.chat-area {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #ffffff; /* Цвет фона области чата */
+}
+
+
+.messages {
+    flex-grow: 1; /* Заставляет блок сообщений занимать все доступное пространство */
+    overflow-y: auto; /* Вертикальная прокрутка для сообщений */
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f0f0f0; /* Цвет фона сообщений */
+}
+
+.message {
+    background-color: #0088cc; /* Цвет фона сообщения */
+    color: white; /* Цвет текста сообщения */
+    padding: 10px;
+    border-radius: 15px; /* Округление сообщения */
+    margin: 5px 0;
+    max-width: 55ch; /* Максимальная ширина в 55 символов */
+    word-wrap: break-word; /* Перенос слов на новую строку */
+    overflow-wrap: break-word; /* Альтернативное свойство для переноса слов */
+    align-self: flex-start; /* Выравнивание сообщений */
+}
+
+
+
+
+.input-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Округление поля ввода */
+    margin-right: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+button.send-button {
+    padding: 10px 15px;
+    background-color: #0088cc; /* Цвет кнопки отправки */
+    color: white;
+    border: none;
+    border-radius: 20px; /* Округление кнопки */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.send-button:hover {
+    background-color: #0077b3; /* Цвет кнопки при наведении */
+}
+
+/* Модальное окно */
+.modal {
+    display: none; /* Скрываем модальное окно по умолчанию */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    overflow: hidden; /* Отключаем прокрутку для body */
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    text-align: center;
+}
+
+input[type="file"], input[type="text"] {
+    width: 78%;
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.language-selector {
+    margin: 10px;
+}
+
+/* Стили для аватара и кнопки «плюс» */
+.avatar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.avatar-display {
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%;
+    background-color: #d3d3d3; /* Серый фон для аватара */
+    margin-right: 10px; /* Отступ между аватаром и кнопкой */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px; /* Размер шрифта для иконки загрузки */
+    color: #666; /* Цвет иконки */
+}
+
+.add-avatar {
+    padding: 10px;
+    background-color: #0088cc; /* Цвет кнопки «плюс» */
+    color: white;
+    border: none;
+    border-radius: 50%; /* Округление кнопки «плюс» */
+    cursor: pointer;
+    width: 40px; /* Ширина кнопки */
+    height: 40px; /* Высота кнопки */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.add-avatar:hover {
+    background-color: #0077b3; /* Цвет кнопки «плюс» при наведении */
+}
+
+/* Кнопка выхода */
+#logoutButtonProfile {
+    background-color: red; /* Красный цвет кнопки выхода */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px; /* Округление кнопки выхода */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#logoutButtonProfile:hover {
+    background-color: darkred; /* Темно-красный при наведении */
+}
+
+.error-message {
+    color: red;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.search-result {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+}
+
+.start-chat-button {
+    padding: 5px 10px;
+    background-color: #0088cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.start-chat-button:hover {
+    background-color: #0077b3;
+}
+
+.user-button {
+    display: flex; /* Используем flexbox для размещения аватара и текста */
+    align-items: center; /* Центрируем элементы по вертикали */
+    width: 100%; 
+    margin: 5px 0; 
+    padding: 10px; /* Уменьшил отступы для большей компактности */
+    background: linear-gradient(135deg, #0099cc, #66ccff); /* Градиент */
+    color: white; 
+    border: none; 
+    border-radius: 3px; 
+    cursor: pointer; 
+    text-align: left; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень */
+    transition: background 0.3s, transform 0.2s; /* Плавный переход */
+}
+
+.user-button:hover {
+    background: linear-gradient(135deg, #0088cc, #59a3d4); /* Градиент при наведении */
+    transform: scale(1.05); /* Увеличение при наведении */
+}
+
+.user-avatar {
+    width: 30px; /* Уменьшили ширину аватара */
+    height: 30px; /* Уменьшили высоту аватара */
+    border-radius: 50%; /* Круглая форма */
+    margin-right: 10px; /* Отступ справа от аватара */
+}
+
+
+body {
+    overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Изменение направления для мобильных устройств */
+        height: 100vh; /* Устанавливаем высоту контейнера */
+        margin: 0; /* Убираем отступы */
+        padding: 0; /* Убираем внутренние отступы */
+    }
+
+    .chat-list {
+        width: 100%; /* Полная ширина для списка чатов */
+        border-right: none; /* Убираем границу */
+        border-bottom: 1px solid #ccc; /* Добавляем границу снизу */
+        display: block; /* Убедитесь, что список отображается */
+        flex-grow: 1; /* Заставляем область занимать оставшееся пространство */
+        overflow-y: auto; /* Добавляем прокрутку, если необходимо */
+        background-color: #f9f9f9; /* Цвет фона списка чатов */
+    }
+
+    .chat-area {
+        display: none; /* Скрываем область чата на мобильных */
+    }
+
+    .header {
+        justify-content: center; /* Центрируем элементы в шапке */
+    }
+
+    #userTagInput {
+        width: calc(100% - 20px); /* Ширина поля поиска с учетом отступов */
+        margin: 10px auto; /* Центрирование */
+        padding: 10px; /* Добавляем внутренние отступы */
+    }
+
+    /* Увеличение размера кнопок и полей ввода */
+    input[type="text"], button.send-button {
+        width: calc(100% - 20px); /* Полная ширина для ввода и кнопки с учетом отступов */
+        margin: 5px 0; /* Убираем отступы */
+        padding: 10px; /* Добавляем внутренние отступы */
+    }
+
+    /* Модальное окно */
+    .modal-content {
+        width: 90%; /* Ширина модального окна для мобильных */
+    }
+
+    .avatar-display {
+        width: 80px; /* Уменьшение размера аватара */
+        height: 80px; /* Уменьшение размера аватара */
+    }
+
+    .user-button {
+        display: flex; /* Используем flexbox для размещения аватара и текста */
+        align-items: center; /* Центрируем элементы по вертикали */
+        width: 95%; 
+        margin: 5px 0; 
+        padding: 10px; /* Уменьшил отступы для большей компактности */
+        background: linear-gradient(135deg, #0099cc, #66ccff); /* Градиент */
+        color: white; 
+        border: none; 
+        border-radius: 3px; 
+        cursor: pointer; 
+        text-align: left; 
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень */
+        transition: background 0.3s, transform 0.2s; /* Плавный переход */
+    }
+    
+    .user-button:hover {
+        background: linear-gradient(135deg, #0088cc, #59a3d4); /* Градиент при наведении */
+        transform: scale(1.05); /* Увеличение при наведении */
+    }
+    
+    .user-avatar {
+        width: 30px; /* Уменьшили ширину аватара */
+        height: 30px; /* Уменьшили высоту аватара */
+        border-radius: 50%; /* Круглая форма */
+        margin-right: 10px; /* Отступ справа от аватара */
+    }
+}
+
+
+
+
+
+.my-message {
+    background-color: #4CAF50; /* Цвет фона для отправленных сообщений */
+    color: white; /* Цвет текста сообщения */
+    align-self: flex-end; /* Выравнивание моих сообщений вправо */
+    margin-left: auto; /* Автоматический отступ слева для выравнивания вправо */
+}
+
+
+.back-button {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    font-weight: bold;
+}
+
+
+.back-button:hover {
+    background-color: #0077b3;
+}
+
+
+button.lock-button {
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #888; /* Цвет иконки замка */
+    margin-right: 10px; /* Отступ от поля ввода */
+}
+
+button.lock-button:hover {
+    color: #555; /* Цвет иконки при наведении */
+}
+
+
+.modal1 {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Остается на месте при прокрутке */
+    z-index: 1000; /* Поверх других элементов */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ширина 100% */
+    height: 100%; /* Высота 100% */
+    overflow: auto; /* Прокрутка, если нужно */
+    background-color: rgb(0,0,0); /* Черный фон */
+    background-color: rgba(0,0,0,0.4); /* Полупрозрачный фон */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Белый фон */
+    margin: 15% auto; /* 15% сверху и центровка по горизонтали */
+    padding: 20px;
+    border: 1px solid #888; /* Граница */
+    width: 80%; /* Ширина 80% */
+}
+
+.close {
+    color: #aaa; /* Цвет закрывающей кнопки */
+    float: right; /* Справа */
+    font-size: 28px; /* Размер шрифта */
+    font-weight: bold; /* Жирный */
+}
+
+.close:hover,
+.close:focus {
+    color: black; /* Цвет при наведении */
+    text-decoration: none; /* Без подчеркивания */
+    cursor: pointer; /* Указатель */
+}
+
+
