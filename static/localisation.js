@@ -1,0 +1,203 @@
+
+const translations = {
+    ru: {
+        header: "Главное Меню",
+        placeholderUserTag: "Введите тег пользователя...",
+        startChatButton: "Начать чат",
+        placeholderMessage: "Введите сообщение...",
+        lockMessage: "Заблокировать сообщение",
+        settingsHeader: "Настройки профиля",
+        chooseLanguage: "Выберите язык:",
+        saveSettings: "Сохранить настройки",
+        logout: "Выйти",
+        sendButton: "Отправить",
+    },
+    ua: {
+        header: "Головне Меню",
+        placeholderUserTag: "Введіть тег користувача...",
+        startChatButton: "Розпочати чат",
+        placeholderMessage: "Введіть повідомлення...",
+        lockMessage: "Заблокувати повідомлення",
+        settingsHeader: "Налаштування профілю",
+        chooseLanguage: "Оберіть мову:",
+        saveSettings: "Зберегти налаштування",
+        logout: "Вийти",
+        sendButton: "Надіслати",
+    },
+    en: {
+        header: "Main Menu",
+        placeholderUserTag: "Enter user tag...",
+        startChatButton: "Start Chat",
+        placeholderMessage: "Enter message...",
+        lockMessage: "Lock Message",
+        settingsHeader: "Profile Settings",
+        chooseLanguage: "Choose Language:",
+        saveSettings: "Save Settings",
+        logout: "Logout",
+        sendButton: "Send",
+    },
+    pt: {
+        header: "Menu Principal",
+        placeholderUserTag: "Digite a tag do usuário...",
+        startChatButton: "Iniciar Chat",
+        placeholderMessage: "Digite a mensagem...",
+        lockMessage: "Bloquear Mensagem",
+        settingsHeader: "Configurações do Perfil",
+        chooseLanguage: "Escolha o Idioma:",
+        saveSettings: "Salvar Configurações",
+        logout: "Sair",
+        sendButton: "Enviar",
+    },
+    de: {
+        header: "Hauptmenü",
+        placeholderUserTag: "Benutzertag eingeben...",
+        startChatButton: "Chat starten",
+        placeholderMessage: "Nachricht eingeben...",
+        lockMessage: "Nachricht sperren",
+        settingsHeader: "Profileinstellungen",
+        chooseLanguage: "Sprache auswählen:",
+        saveSettings: "Einstellungen speichern",
+        logout: "Abmelden",
+        sendButton: "Senden",
+    },
+    fr: {
+        header: "Menu Principal",
+        placeholderUserTag: "Entrez le tag utilisateur...",
+        startChatButton: "Démarrer le chat",
+        placeholderMessage: "Entrez le message...",
+        lockMessage: "Verrouiller le message",
+        settingsHeader: "Paramètres du profil",
+        chooseLanguage: "Choisissez la langue:",
+        saveSettings: "Enregistrer les paramètres",
+        logout: "Se déconnecter",
+        sendButton: "Envoyer",
+    },
+    zh: {
+        header: "主菜单",
+        placeholderUserTag: "输入用户标签...",
+        startChatButton: "开始聊天",
+        placeholderMessage: "输入消息...",
+        lockMessage: "锁定消息",
+        settingsHeader: "个人资料设置",
+        chooseLanguage: "选择语言:",
+        saveSettings: "保存设置",
+        logout: "注销",
+        sendButton: "发送",
+    },
+    es: {
+        header: "Menú Principal",
+        placeholderUserTag: "Ingrese la etiqueta de usuario...",
+        startChatButton: "Iniciar chat",
+        placeholderMessage: "Ingrese el mensaje...",
+        lockMessage: "Bloquear mensaje",
+        settingsHeader: "Configuración de perfil",
+        chooseLanguage: "Elige idioma:",
+        saveSettings: "Guardar configuraciones",
+        logout: "Cerrar sesión",
+        sendButton: "Enviar",
+    },
+    ar: {
+        header: "القائمة الرئيسية",
+        placeholderUserTag: "أدخل علامة المستخدم...",
+        startChatButton: "بدء الدردشة",
+        placeholderMessage: "أدخل الرسالة...",
+        lockMessage: "قفل الرسالة",
+        settingsHeader: "إعدادات الملف الشخصي",
+        chooseLanguage: "اختر اللغة:",
+        saveSettings: "حفظ الإعدادات",
+        logout: "تسجيل الخروج",
+        sendButton: "إرسال",
+    },
+    pl: {
+        header: "Menu Główne",
+        placeholderUserTag: "Wprowadź tag użytkownika...",
+        startChatButton: "Rozpocznij czat",
+        placeholderMessage: "Wprowadź wiadomość...",
+        lockMessage: "Zablokuj wiadomość",
+        settingsHeader: "Ustawienia profilu",
+        chooseLanguage: "Wybierz język:",
+        saveSettings: "Zapisz ustawienia",
+        logout: "Wyloguj się",
+        sendButton: "Wysłać",
+    },
+    ro: {
+        header: "Meniul Principal",
+        placeholderUserTag: "Introduceți eticheta utilizatorului...",
+        startChatButton: "Începeți chat-ul",
+        placeholderMessage: "Introduceți mesajul...",
+        lockMessage: "Blocați mesajul",
+        settingsHeader: "Setări profil",
+        chooseLanguage: "Alegeți limba:",
+        saveSettings: "Salvați setările",
+        logout: "Deconectare",
+        sendButton: "Trimite",
+    },
+    tr: {
+        header: "Ana Menü",
+        placeholderUserTag: "Kullanıcı etiketini girin...",
+        startChatButton: "Sohbeti başlat",
+        placeholderMessage: "Mesaj girin...",
+        lockMessage: "Mesajı kilitle",
+        settingsHeader: "Profil Ayarları",
+        chooseLanguage: "Dil seçin:",
+        saveSettings: "Ayarları kaydet",
+        logout: "Çıkış yap",
+        sendButton: "Göndermek",
+    },
+    it: {
+        header: "Menu Principale",
+        placeholderUserTag: "Inserisci il tag utente...",
+        startChatButton: "Avvia chat",
+        placeholderMessage: "Inserisci messaggio...",
+        lockMessage: "Blocca messaggio",
+        settingsHeader: "Impostazioni del profilo",
+        chooseLanguage: "Scegli la lingua:",
+        saveSettings: "Salva impostazioni",
+        logout: "Disconnetti",
+        sendButton: "Inviare",
+    },
+    ko: {
+        header: "메인 메뉴",
+        placeholderUserTag: "사용자 태그 입력...",
+        startChatButton: "채팅 시작",
+        placeholderMessage: "메시지 입력...",
+        lockMessage: "메시지 잠금",
+        settingsHeader: "프로필 설정",
+        chooseLanguage: "언어 선택:",
+        saveSettings: "설정 저장",
+        logout: "로그아웃",
+        sendButton: "보내다",
+    },
+    ja: {
+        header: "メインメニュー",
+        placeholderUserTag: "ユーザータグを入力...",
+        startChatButton: "チャットを開始",
+        placeholderMessage: "メッセージを入力...",
+        lockMessage: "メッセージをロック",
+        settingsHeader: "プロフィール設定",
+        chooseLanguage: "言語を選択:",
+        saveSettings: "設定を保存",
+        logout: "ログアウト",
+        sendButton: "送る",
+    }
+};
+
+function changeLanguage(lang) {
+    document.title = translations[lang].header;
+    document.getElementById("userTagInput").placeholder = translations[lang].placeholderUserTag;
+    document.getElementById("chatButton").innerText = translations[lang].startChatButton;
+    document.getElementById("messageInput").placeholder = translations[lang].placeholderMessage;
+    document.getElementById("lockMessageModal").querySelector("h2").innerText = translations[lang].lockMessage;
+    document.getElementById("settingsHeader").innerText = translations[lang].settingsHeader;
+    document.getElementById("languageLabel").innerText = translations[lang].chooseLanguage;
+    document.getElementById("saveSettingsButton").innerText = translations[lang].saveSettings;
+    document.getElementById("logoutButtonProfile").innerText = translations[lang].logout;
+    document.getElementById("sendButton").innerText = translations[lang].sendButton;
+}
+
+// Слушаем изменения в селекторе языка
+document.getElementById("languageSelect").addEventListener("change", (event) => {
+    changeLanguage(event.target.value);
+});
+
+changeLanguage('en');
