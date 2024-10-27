@@ -97,7 +97,10 @@
         let token; // Переменная для хранения токена
 
         function connectWebSocket() {
-            socket = new WebSocket('ws://192.168.0.108:8080/ws');
+            // Выбор протокола WebSocket в зависимости от протокола страницы
+         const protocol = window.location.protocol === "https:" ? "wss://" : "ws://";
+         const socketUrl = `${protocol}192.168.0.108:8080/ws`;
+            socket = new WebSocket(socketUrl);
 
             socket.onopen = function() {
                 console.log('Подключено к серверу');
@@ -215,4 +218,3 @@
     </script>
 </body>
 </html>
-
