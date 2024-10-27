@@ -45,15 +45,17 @@ function initWebSocket() {
         return;
     }
 
-    socket = new WebSocket("ws://0.0.0.0:8080/ws");
-    sessionStorage.setItem('mainPageOpen', 'true');
+    // Выбор протокола WebSocket в зависимости от протокола страницы
+    const protocol = window.location.protocol === "https:" ? "wss://" : "ws://";
+    const socketUrl = `${protocol}0.0.0.0:8080/ws`;
 
+    socket = new WebSocket(socketUrl);
+    sessionStorage.setItem('mainPageOpen', 'true');
 
     socket.onopen = function() {
         console.log("Соединение WebSocket установлено");
         username123();
     };
-
 
     socket.onmessage = function(event) {
         const data = JSON.parse(event.data);
@@ -74,6 +76,7 @@ function initWebSocket() {
         console.error("Ошибка WebSocket:", error.message || error);
     };
 }
+
 
 
 function handleServerMessage(data) {
