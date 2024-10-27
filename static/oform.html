@@ -1,1 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration and Login</title>
+    <link rel="icon" type="image/png" href="/static/avatar.png">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 200px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #response {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+        .password-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+        }
+        input[type="password"] {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 16px;
+            margin: 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .toggle-password {
+            margin-left: 10px;
+            background-color: transparent;
+            border: none;
+            color: #4CAF50;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration and Login</h2>
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <div class="password-container">
+            <input type="password" id="password" placeholder="Enter your password" required>
+            <button class="toggle-password" id="togglePassword">👁️</button>
+        </div>
+        <br>
+        <button id="registerButton">Registration</button>
+        <button id="loginButton">Login</button>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        let socket;
+        let userId; // Переменная для хранения user_id
+        let token; // Переменная для хранения токена
+
+        function connectWebSocket() {
+            socket = new WebSocket('ws://localhost:8080/ws');
+
+            socket.onopen = function() {
+                console.log('Подключено к серверу');
+            };
+
+            socket.onerror = function(event) {
+                console.error("Ошибка WebSocket:", event);
+            };
+
+            socket.onclose = function(event) {
+                console.log('Соединение закрыто:', event);
+                setTimeout(connectWebSocket, 1000);
+            };
+
+            socket.onmessage = function(event) {
+                const response = JSON.parse(event.data);
+                document.getElementById('response').innerText = response.message;
+                console.log("Received data:", response); // Логируем полученные данные
+
+                if (response.status === "success") {
+                    userId = response.user_id;
+                    token = response.token; // Сохраняем токен
+                    sessionStorage.setItem('userId', userId); 
+                    sessionStorage.setItem('token', token); 
+                    console.log('Успешный вход/регистрация, userId и токен установлены:', userId, token);
+                    
+                    // Добавляем задержку перед перенаправлением
+                    setTimeout(() => {
+                        window.location.href = "main.html"; // Перенаправление на главную страницу
+                    }, 7000); // Задержка 7 секунд (7000 миллисекунд)
+                }
+            };
+        }
+
+
+        window.onload = function() {
+            const storedUserId = sessionStorage.getItem('userId'); 
+            const storedToken = sessionStorage.getItem('token'); 
+            if (storedUserId && storedToken) {
+                window.location.href = "main.html"; // Перенаправляем на главную страницу
+            }
+
+            // Проверка на наличие флага в sessionStorage
+            if (sessionStorage.getItem('mainPageOpen')) {
+                alert("Вы уже вошли в систему. Пожалуйста, закройте эту вкладку или перейдите на главную страницу.");
+                window.location.href = "main.html"; // Перенаправление на главную страницу
+            } else {
+                sessionStorage.setItem('mainPageOpen', 'true'); // Устанавливаем флаг
+            }
+
+            connectWebSocket();
+        };
+
+        document.getElementById('registerButton').onclick = function() {
+            let email = document.getElementById("email").value.trim();  // Обрезаем пробелы
+            const password = document.getElementById("password").value;
+
+            // Логирование данных перед отправкой
+            console.log("Отправка данных для регистрации:", { email, password });
+
+            // Проверка формата email
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Введите корректный email");
+                return;
+            }
+
+            if (email && password) {
+                socket.send(JSON.stringify({
+                    command: "register",
+                    email: email,
+                    password: password
+                }));
+            } else {
+                alert("Пожалуйста, заполните все поля");
+            }
+        };
+
+        document.getElementById('loginButton').onclick = function() {
+            let email = document.getElementById("email").value.trim();  // Обрезаем пробелы
+            const password = document.getElementById("password").value;
+
+            // Логирование данных перед отправкой
+            console.log("Отправка данных для входа:", { email, password });
+
+            // Проверка формата email
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Введите корректный email");
+                return;
+            }
+
+            if (email && password) {
+                socket.send(JSON.stringify({
+                    command: "login",
+                    email: email,
+                    password: password
+                }));
+            } else {
+                alert("Пожалуйста, заполните все поля");
+            }
+        };
+
+        document.getElementById('togglePassword').onclick = function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        };
+
+        // Удаляем флаг при закрытии вкладки
+        window.onbeforeunload = function() {
+            sessionStorage.removeItem('mainPageOpen'); // Удаляем флаг
+        };
+    </script>
+</body>
+</html>
 
